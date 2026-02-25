@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dry Eye Disease Checker</title>
+
+  <style>
+    :root{
+      --bg:#f7fafc; --card:#ffffff; --accent:#1f6feb; --muted:#6b7280;
+      --radius:12px;
+    }
+    *{box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
+    body{margin:0;background:linear-gradient(180deg,#eef2ff 0%,var(--bg) 60%);color:#111827}
+    .container{max-width:980px;margin:32px auto;padding:24px}
+    .hero{text-align:center;padding:18px}
+    h1{margin:.2rem 0;font-size:1.8rem}
+    p{color:var(--muted);margin:0 0 6px}
+
+    form.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(17,24,39,0.06)}
+    label{display:flex;flex-direction:column;font-size:0.88rem;color:#111827}
+    input[type=number],select{padding:10px;border-radius:8px;border:1px solid #e5e7eb;margin-top:6px}
+    .actions{grid-column:1/-1;display:flex;gap:8px;justify-content:flex-end}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+    .btn-ghost{background:transparent;color:var(--accent);border:1px solid rgba(31,111,235,0.18)}
+    .result{margin-top:18px;background:var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(17,24,39,0.04)}
+    .footer{text-align:center;margin-top:12px;color:var(--muted)}
+    @media (max-width:520px){
+      .actions{justify-content:center}
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>Dry Eye Disease Predictor</h1>
+      <p>Fill the form with your information — the model will predict if you likely have Dry Eye Disease and save the record to the database.</p>
+    </header>
+
+    <form id="eyeForm" class="grid">
+      <label>Gender
+        <select name="Gender" required>
+          <option value="F">Female</option>
+          <option value="M">Male</option>
+        </select>
+      </label>
+
+      <label>Age
+        <input name="Age" type="number" min="0" max="120" required />
+      </label>
+
+      <label>Sleep duration (hours)
+        <input name="Sleep duration" type="number" step="0.1" min="0" max="24" required />
+      </label>
+
+      <label>Sleep quality (1-5)
+        <input name="Sleep quality" type="number" min="1" max="5" required />
+      </label>
+
+      <label>Stress level (1-10)
+        <input name="Stress level" type="number" min="1" max="10" required />
+      </label>
+
+      <label>Blood pressure (e.g., 137/89)
+  <input 
+    name="Blood pressure" 
+    type="text" 
+    placeholder="137/89"
+    pattern="^([1-9][0-9]{1,2})\/([1-9][0-9]{1,2})$"
+    required 
+    autocomplete="off"
+  />
+</label>
+
+      <label>Heart rate (bpm)
+        <input name="Heart rate" type="number" min="30" max="200" required />
+      </label>
+
+      <label>Daily steps
+        <input name="Daily steps" type="number" min="0" required />
+      </label>
+
+      <label>Physical activity (min/day)
+        <input name="Physical activity" type="number" min="0" required />
+      </label>
+
+      <label>Height (cm)
+        <input name="Height" type="number" min="30" max="250" required />
+      </label>
+
+      <label>Weight (kg)
+        <input name="Weight" type="number" min="2" max="500" step="0.1" required />
+      </label>
+
+      <label>Sleep disorder
+        <select name="Sleep disorder" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Wake up during night
+        <select name="Wake up during night" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Feel sleepy during day
+        <select name="Feel sleepy during day" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Caffeine consumption
+  <select name="Caffeine consumption" required>
+    <option value="Y">Yes</option>
+    <option value="N">No</option>
+  </select>
+</label>
+
+<label>Alcohol consumption
+  <select name="Alcohol consumption" required>
+    <option value="Y">Yes</option>
+    <option value="N">No</option>
+  </select>
+</label>
+
+      <label>Smoking
+        <select name="Smoking" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Medical issue
+        <select name="Medical issue" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Ongoing medication
+        <select name="Ongoing medication" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Smart device before bed
+        <select name="Smart device before bed" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Average screen time (hours/day)
+        <input name="Average screen time" type="number" min="0" step="0.1" required />
+      </label>
+
+      <label>Blue-light filter
+        <select name="Blue-light filter" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Discomfort Eye-strain
+        <select name="Discomfort Eye-strain" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Redness in eye
+        <select name="Redness in eye" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <label>Itchiness / Irritation in eye
+        <select name="Itchiness/Irritation in eye" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </label>
+
+      <div class="actions">
+        <button type="submit" class="btn">Check</button>
+        <button type="reset" class="btn btn-ghost">Reset</button>
+      </div>
+    </form>
+
+    <section class="result" id="resultBox" hidden>
+      <h2 id="resultTitle"></h2>
+      <p id="resultText"></p>
+    </section>
+
+    <footer class="footer">
+      <small>Model & Dataset adapted from provided notebook & CSV. (Local use only.)</small>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('eyeForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+
+      const payload = {};
+      for (let [key, value] of formData.entries()) {
+        payload[key] = value;
+      }
+
+      const resultBox = document.getElementById('resultBox');
+      const title = document.getElementById('resultTitle');
+      const text = document.getElementById('resultText');
+
+      title.textContent = 'Checking...';
+      text.textContent = 'Please wait.';
+      resultBox.hidden = false;
+
+      try {
+        const resp = await fetch('http://127.0.0.1:5000/predict', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        });
+        if (!resp.ok) throw new Error('Server error: ' + resp.statusText);
+
+        const data = await resp.json();
+
+        if (data.success) {
+          title.textContent = data.prediction === 1 ? 'Likely Dry Eye Disease' : 'Unlikely Dry Eye Disease';
+          text.innerHTML = `<strong>Probability (approx.):</strong> ${Math.round((data.probability || 0)*100)}% <br>
+                            <strong>Model note:</strong> ${data.message || 'Prediction saved to DB.'}`;
+        } else {
+          title.textContent = 'Error';
+          text.textContent = data.message || 'Prediction failed';
+        }
+      } catch (err) {
+        title.textContent = 'Error';
+        text.textContent = err.message;
+      }
+    });
+  </script>
+
+</body>
+</html>
